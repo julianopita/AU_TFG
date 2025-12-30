@@ -1,0 +1,160 @@
+/*calcular o tamanho do conteudo baseado no nav*/
+#home {
+  display: flex;
+  width: 100%;
+  min-height: 58vh;
+  position: relative;
+}
+
+h2 {
+  font-size: 0.8rem;
+  color: var(--cor-neutra-cinza);
+}
+
+.caret {
+  display: inline-block; /* Ensures the caret element has proper dimensions */
+  width: 0;
+  height: 0;
+  rotate: 270deg;
+  border-top: 8px solid #000000; /* Creates the caret shape */
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  transition: transform 0.3s ease; /* Adds smooth rotation transition */
+  position: relative; /* Allows the top property to work */
+  top: -4px; /* Moves the caret up by 5px */
+}
+
+.rotated {
+  transform: rotate(90deg); /* Use transform to rotate the caret */
+}
+
+.cta {
+  width: 60%;
+  max-width: 1000px;
+  display: none;
+  flex-direction: column;
+  gap: 28px;
+  align-items: left;
+  margin-top: 5%;
+
+  text-align: left;
+}
+
+.visible {
+  display: flex;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: var(--cor-neutra-preta);
+}
+.title:hover {
+  cursor: pointer;
+}
+
+/*mudar a cor da palavra em destaque*/
+.cta span {
+  color: #e59500;
+}
+
+.cta p {
+  font-size: 1rem;
+  color: var(--cor-neutra-cinza-escuro);
+  /* background-color: rgba(0, 0, 0, 0.8); */
+}
+
+.column {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.column p {
+  margin: 10px;
+  min-width: 150px;
+}
+
+.cta a {
+  font-size: 1rem;
+  color: var(--cor-palavra-destaque);
+  /* background-color: rgba(0, 0, 0, 0.8); */
+}
+
+.novo {
+  color: var(--cor-titulo-destaque);
+}
+
+.cta .enum {
+  margin-left: 30px;
+}
+
+.cta img {
+  max-width: 80%;
+}
+
+#cta_buttons {
+  display: flex;
+  gap: 24px;
+}
+
+#cta_buttons a {
+  text-decoration: none;
+  color: #282d24;
+}
+
+#banner {
+  display: flex;
+  align-items: start;
+  justify-content: end;
+  width: 70%;
+  z-index: 2;
+}
+
+#banner img {
+  height: 100%;
+  width: fit-content;
+}
+
+#contentind {
+  margin: 0 0;
+  padding: 0px 8%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1170px) {
+  #home {
+    min-height: 100%;
+    padding-top: 0px;
+  }
+
+  main {
+    min-height: 58vh;
+    flex: 1;
+  }
+
+  #banner,
+  #banner img,
+  #home .shape {
+    display: none;
+  }
+
+  .cta {
+    width: 100%;
+    align-items: left;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #phone_button button {
+    display: none;
+  }
+
+  .column {
+    flex-wrap: wrap;
+  }
+}

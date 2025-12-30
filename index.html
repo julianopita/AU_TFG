@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>DCC2030</title>
+    <meta name="description" content="DCC2030" />
+    <meta
+      name="keywords"
+      content="IFSP-DCC, projeto participativo, obras públicas"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <body>
+    <header
+      style="background-image: url(images/bannerIndexDark.jpg)"
+      class="cabecalho"
+    >
+      <nav id="navbar" role="navigation">
+        <ul id="nav_list">
+          <!--lista de navegacao do menu-->
+          <li class="nav_item active">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <!-- <li class="nav_item">
+            <a href="processo.html" class="nav-link">Processo</a>
+          </li> -->
+          <li class="nav_item">
+            <a href="fase1.html" class="nav-link">Fase 1</a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Fase 2<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Fase 3<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Execução<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item">
+            <a href="equipe.html" class="nav-link">Equipe</a>
+          </li>
+        </ul>
+
+        <!--menu de hamburger do mobile-->
+        <button id="mobile_btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+
+      <div id="mobile_menu">
+        <ul id="mobile_nav_list">
+          <!--lista de navegacao do menu-->
+          <li class="nav_item active">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+          <!-- <li class="nav_item">
+            <a href="processo.html" class="nav-link">Processo</a>
+          </li> -->
+          <li class="nav_item">
+            <a href="fase1.html" class="nav-link">Fase 1</a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Fase 2<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Fase 3<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item inactive">
+            <a href="#" class="nav-link">Execução<sup> em breve</sup></a>
+          </li>
+          <li class="nav_item">
+            <a href="equipe.html" class="nav-link">Equipe</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main id="contentind">
+      <section id="home">
+        <div>
+          <br />
+          <h2>DCC2030 | Departamento de Construção Civil, 2024</h2>
+          <br />
+          <h1 class="pageTitle">APRESENTAÇÃO</h1>
+          <br />
+          <div class="cta visible">
+            <p>
+              O projeto <strong>DCC2030</strong> tem como objetivo construir
+              coletivamente e participativamente uma visão conjunta sobre a
+              configuração ideal dos espaços do Departamento de Construção Civil
+              frente à nova realidade da instituição e dos cursos,
+              constituindo-se em um processo contínuo de planejamento a médio e
+              longo prazo das intervenções nos espaços físicos ocupados pelo DCC
+              no <i>campus</i> São Paulo, especialmente o Bloco H.
+            </p>
+            <p>
+              O objetivo é de, através de um processo de escuta e participação
+              ativa de toda a comunidade no desenvolvimento de um anteprojeto,
+              criar uma visão compartilhada das estruturas e condições ideais a
+              serem perseguidas nos anos seguintes, evitando o improviso e as
+              soluções definidas por urgências. Estão previstas diversas fases
+              no desenvolvimento do projeto, com uma escuta inicial de toda a
+              comunidade, consolidação destes dados iniciais e desenvolvimento
+              de um projeto participativo que abarque as diferentes necessidades
+              identificadas.
+            </p>
+            <p>
+              O processo deverá ocorrer em três fases distintas. Clique em cada
+              uma para saber mais:
+            </p>
+            <br />
+          </div>
+          <h1 class="title" onclick="toggleContent('cta0', 'caret0')">
+            <strong style="color: crimson">NOVO!</strong> - QUESTIONÁRIO
+            <span class="caret" id="caret0"></span>
+          </h1>
+          <div id="cta0" class="cta">
+            <p>
+              <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSeW_1TQjHz6N3i0IqFAsl7wUG7EEDkFrYkm0PRZNrz0Yn_2_g/viewform?embedded=true"
+                width="480"
+                height="500"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0"
+                >Carregando…</iframe
+              >
+            </p>
+          </div>
+          <br />
+          <h1 class="title" onclick="toggleContent('cta1', 'caret1')">
+            FASE 1 - ESCUTA ATIVA
+            <span class="caret" id="caret1"></span>
+          </h1>
+          <div id="cta1" class="cta">
+            <p>
+              A primeira fase do <strong>DCC2030</strong> contitui-se em um
+              processo de <strong>escuta ativa</strong> à comunidade. Por escuta
+              ativa, entendem-se os processos em que os pesquisadores não se
+              colocam de maneira externa ou passiva aos indivíduos envolvidos,
+              mas que se vejam como sujeitos pertencentes à essa comunidade, ao
+              passo que a comunidade também é considerada como condutora do
+              processo investigativo. Dessa forma, a escuta se faz através de
+              intrumentos tradicionais, como questionários, entrevistas,
+              enquetes, iniciados por iniciativa da equipe do
+              <strong>DCC2030</strong>, mas também através da leitura e
+              percepção de ações originadas dentro da comunidade envolvida e que
+              são consideradas como leituras próprias e endógenas. São,
+              portanto, benvindos e desejáveis ações em que os diferentes grupos
+              manifestam as suas opiniões, em um processo sistêmico e
+              autorganizado.
+            </p>
+            <p>Nesta fase faremos uso de:</p>
+            <p class="enum">
+              <strong>Questionários</strong> - questões objetivas e subjetivas.
+              <strong style="color: crimson">JÁ DISPONÍVEL!</strong>;
+            </p>
+            <p class="enum">
+              <strong>Entrevistas</strong> - gerais, por segmento e por curso;
+            </p>
+            <p class="enum">
+              <strong>Análise de documentação</strong> - documentos históricos,
+              normas e PPCs;
+            </p>
+            <p class="enum">
+              <strong>Workshops e oficinas</strong> - Desenho, fotografia,
+              maquetes, vídeos, etc.
+            </p>
+
+            <p>
+              Em paralelo a este processo, será realizado o levantamento da
+              realidade física dos espaços do DCC. Esse levantamento deverá se
+              concretizar em um retrato da realidade do ambiente construído,
+              seja interno ao bloco H, seja no entorno deste. Todas estas
+              informações deverão ser concentrada em um modelo BIM (<i
+                >Building Information Modeling</i
+              >), que será utilizado nas fases posteriores como suporte à tomada
+              de decisões da comunidade.
+            </p>
+
+            <p>
+              Estamos atualmente no desenvolvimento desta fase. Maiores
+              informações e formas de participação, acesse a
+              <a href="fase1.html">página da Fase 1</a>
+            </p>
+          </div>
+          <br />
+
+          <h1 class="title" onclick="toggleContent('cta2', 'caret2')">
+            FASE 2 - ANÁLISE E DIVULGAÇÃO
+            <span class="caret" id="caret2"></span>
+          </h1>
+          <div id="cta2" class="cta">
+            <p>
+              Neste momento, os dados coletados serão apresentados à comunidade
+              e serão organizados momentos de discussão destes dados.
+            </p>
+            <p>
+              Este momento é importante para que os diferentes segmentos da
+              comunidade compreendam as visões dos demais e estabeleçam diálogo
+              para equalizar visões antagônicas, pontos de convergência e
+              questões ainda não abordadas, contribuindo para a construção de
+              uma visão unificada para os espaços físicos.
+            </p>
+            <p>
+              Neste momento também será apresentado o diagnóstico dos espaços
+              físicos, com a disponibilização de materiais técnicos para que a
+              comunidade possa se apropriar deles e construir propostas de
+              organização e intervenção.
+            </p>
+          </div>
+          <br />
+
+          <h1 class="title" onclick="toggleContent('cta3', 'caret3')">
+            FASE 3 - PROJETO PARTICIPATIVO
+            <span class="caret" id="caret3"></span>
+          </h1>
+          <div id="cta3" class="cta">
+            <p>
+              Nesta fase haverá a discussão sobre a visão global a ser
+              perseguida nos próximos anos para o DCC. Essa fase contará com
+              discussões em workshops, conferências e em uma plataforma
+              <i>online</i> de discussão e projeto participativo.
+            </p>
+          </div>
+          <div class="cta visible"></div>
+          <strong>Realização</strong><br />
+          <span>
+            <a><img src="images/Marca_IFSP_2015_SPO_H_1.png" /></a>
+          </span>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div id="footer_items"></div>
+    </footer>
+    <script src="javascript/script.js"></script>
+  </body>
+</html>

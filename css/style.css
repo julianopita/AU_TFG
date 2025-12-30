@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("header.css");
+@import url("home.css");
+@import url("footer.css");
+
+:root {
+  --cor-footer-fundo: #ffe8b4;
+  --cor-principal-fundo: #fff9ea;
+  --cor-botao-fundo: #00e498;
+  --cor-titulo: #ffffff;
+  --cor-titulo-destaque: rgb(185, 4, 4);
+  --cor-quadrado-onda-fundo: #00e498;
+  --cor-palavra-destaque: #00e498;
+  --cor-hover-botao: #ffd988;
+  --cor-estrelas: #00e498;
+  --cor-itens-header: #ffffff;
+
+  --cor-neutra-preta: #000000;
+  --cor-neutra-cinza-escuro: #1d1d1d;
+  --cor-neutra-cinza: #7e7e7e;
+  --cor-neutra-cinza-claro: #cecece;
+  --cor-neutra-branca: #fff;
+  --cor-neutra-cards: #434343;
+  --cor-neutra-subtitulo: #333333;
+
+  --cor-midia-social-body: #192019;
+  --cor-midia-social-body-fundo: #ffffff;
+  --cor-midia-social-footer: #123c69;
+  --cor-midia-social-footer-fundo: #e8eef2;
+}
+
+/*Custom fonts*/
+
+@font-face {
+  font-family: "SF Compact Display Thin";
+  font-style: normal;
+  font-weight: light;
+  src: local("SF Compact Display Thin"),
+    url("../fonts/sf-compact-display-thin-58646eb43a785.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SF Compact Display Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("SF Compact Display Medium"),
+    url("../fonts/sf-compact-display-medium-5864711817c30.woff") format("woff");
+}
+
+* {
+  font-family: "SF Compact Display Thin", sans-serif;
+  /* color: white; */
+  font-weight: light;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--cor-neutra-branca);
+}
+
+main {
+  min-height: 58vh;
+  flex: 1;
+}
+
+section {
+  padding: 28px 0%;
+  flex: 1;
+}
+
+.btn-default {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-botao-fundo);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 600;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  color: white;
+  transition: backgroud-color 0.3s ease;
+  font-family: "Avenir", sans-serif;
+}
+
+.btn-default:hover {
+  background-color: var(--cor-hover-botao);
+  cursor: pointer;
+}
+
+.section-title {
+  color: var(--cor-titulo);
+  font-size: 1.563rem;
+}
+
+.material-symbols-outlined {
+  font-size: 28px !important;
+  color: var(--cor-itens-header);
+}
