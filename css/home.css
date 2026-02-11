@@ -158,3 +158,258 @@ h2 {
     flex-wrap: wrap;
   }
 }
+
+/* ----------------- Repositório de TFG ----------------- */
+
+.repository-filters {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 10px 0 20px 0;
+}
+
+.repository-filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.repository-filter {
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  flex: 1;
+}
+
+.repository-filters label {
+  font-size: 0.85rem;
+  color: var(--cor-neutra-cinza-escuro);
+  margin-bottom: 4px;
+}
+
+.repository-filters input[type="search"],
+.repository-filters select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--cor-neutra-cinza-claro);
+  font-size: 0.95rem;
+}
+
+#repository-results {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.repository-year-heading {
+  font-size: 1.3rem;
+  margin-top: 24px;
+  margin-bottom: 4px;
+  color: var(--cor-neutra-subtitulo);
+}
+
+.project-card {
+  border-radius: 10px;
+  border: 1px solid var(--cor-neutra-cinza-claro);
+  padding: 14px 16px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-card-title {
+  font-size: 1.1rem;
+  color: var(--cor-neutra-preta);
+}
+
+.project-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-title-link:hover {
+  text-decoration: underline;
+}
+
+.project-card-meta,
+.project-card-keywords {
+  font-size: 0.9rem;
+  color: var(--cor-neutra-cinza-escuro);
+}
+
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.project-card-button {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: var(--cor-botao-fundo);
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.project-card-button:hover {
+  background-color: var(--cor-hover-botao);
+}
+
+.project-card-button-secondary {
+  background-color: var(--cor-neutra-cinza-escuro);
+}
+
+.project-card-button-secondary:hover {
+  background-color: #555555;
+}
+
+.repository-message {
+  width: 100%;
+  max-width: 1000px;
+  font-size: 0.95rem;
+  color: var(--cor-neutra-cinza-escuro);
+  margin-top: 10px;
+}
+
+.btn-voltar {
+  text-decoration: none;
+  color: var(--cor-palavra-destaque);
+  font-weight: 600;
+}
+
+.btn-voltar:hover {
+  text-decoration: underline;
+}
+
+.noticias-titulo strong {
+  color: crimson;
+}
+
+/* -------- Calendário -------- */
+
+.calendar-table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid var(--cor-neutra-cinza-claro);
+  padding: 8px 10px;
+}
+
+.calendar-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+.calendar-group-row td {
+  font-weight: 600;
+  background-color: #ececec;
+}
+
+/* -------- Orientadores -------- */
+
+#advisors-list {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.advisor-card {
+  border-radius: 10px;
+  border: 1px solid var(--cor-neutra-cinza-claro);
+  padding: 14px 16px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.advisor-name {
+  font-size: 1.1rem;
+  color: var(--cor-neutra-preta);
+}
+
+.advisor-areas,
+.advisor-keywords,
+.advisor-meta {
+  font-size: 0.9rem;
+  color: var(--cor-neutra-cinza-escuro);
+}
+
+.advisor-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.advisor-links a {
+  font-size: 0.9rem;
+  color: var(--cor-palavra-destaque);
+  text-decoration: none;
+}
+
+.advisor-links a:hover {
+  text-decoration: underline;
+}
+
+/* -------- Detalhe do projeto -------- */
+
+.project-detail-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.project-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.project-image-wrapper {
+  flex: 0 0 260px;
+  max-width: 260px;
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.project-text {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-meta-line {
+  font-size: 0.95rem;
+  color: var(--cor-neutra-cinza-escuro);
+}
+
+.project-meta-line strong {
+  font-weight: 600;
+}
+

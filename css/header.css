@@ -17,6 +17,10 @@ header {
   z-index: 3;
 }
 
+.cabecalho {
+  background-image: url("../images/bannerIndexDark.jpg");
+}
+
 header sup {
   font-size: x-small;
   color: var(--cor-palavra-destaque);

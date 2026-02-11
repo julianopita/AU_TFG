@@ -2,8 +2,11 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
-    <title>TFG IFSP | Orientadores</title>
-    <meta name="description" content="Lista de orientadores e orientadoras do Trabalho Final de Graduação em Arquitetura e Urbanismo do IFSP." />
+    <title>TFG IFSP | Detalhes do Trabalho</title>
+    <meta
+      name="description"
+      content="Página individual de Trabalho Final de Graduação em Arquitetura e Urbanismo do IFSP"
+    />
     <meta
       name="keywords"
       content="Trabalho Final de Graduação, Instituto Federal de São Paulo, Arquitetura e Urbanismo, Repositório"
@@ -42,17 +45,19 @@
           <li class="nav_item inactive">
             <a href="calendario.html" class="nav-link">Calendário</a>
           </li>
-          <li class="nav_item active">
+          <li class="nav_item inactive">
             <a href="orientadores.html" class="nav-link">Orientadores</a>
           </li>
           <li class="nav_item inactive">
             <a href="regulamento.html" class="nav-link">Regulamento</a>
           </li>
-          <li class="nav_item inactive">
+          <li class="nav_item active">
             <a href="repositorio.html" class="nav-link">Repositório</a>
           </li>
           <li class="nav_item inactive">
-            <a href="disciplinas.html" class="nav-link">Disciplinas</a>
+            <a href="disciplinas.html" class="nav-link"
+              >Disciplinas<sup> em breve</sup></a
+            >
           </li>
           <li class="nav_item inactive">
             <a href="equipe.html" class="nav-link">Equipe</a>
@@ -74,17 +79,19 @@
           <li class="nav_item inactive">
             <a href="calendario.html" class="nav-link">Calendário</a>
           </li>
-          <li class="nav_item active">
+          <li class="nav_item inactive">
             <a href="orientadores.html" class="nav-link">Orientadores</a>
           </li>
           <li class="nav_item inactive">
             <a href="regulamento.html" class="nav-link">Regulamento</a>
           </li>
-          <li class="nav_item inactive">
+          <li class="nav_item active">
             <a href="repositorio.html" class="nav-link">Repositório</a>
           </li>
           <li class="nav_item inactive">
-            <a href="disciplinas.html" class="nav-link">Disciplinas</a>
+            <a href="disciplinas.html" class="nav-link"
+              >Disciplinas<sup> em breve</sup></a
+            >
           </li>
           <li class="nav_item inactive">
             <a href="equipe.html" class="nav-link">Equipe</a>
@@ -94,65 +101,43 @@
     </header>
     <main id="contentind">
       <section id="home">
-        <div id="advisors-page">
+        <div id="project-detail-page">
           <br />
           <h2>
             TFG | Arquitetura e Urbanismo - Instituto Federal de São Paulo
           </h2>
           <br />
-          <h1 class="pageTitle">ORIENTADORAS E ORIENTADORES</h1>
+          <h1 id="project-title" class="pageTitle">Detalhes do Trabalho</h1>
           <br />
-          <div class="cta visible">
-            <p>
-              As orientadoras e orientadores disponíveis estão listados nesta
-              página com as áreas de orientação, link para o currículo Lattes e
-              orientações e coorientações em andamento. Para acesso aos
-              trabalhos já orientados por cada docente, utilize a busca no
-              <a href="repositório.html">Repositório</a>
-            </p>
-            <p>
-              Segundo as Diretrizes Curriculares Nacionais vigentes para os
-              cursos de Arquitetura e Urbanismo, o Trabalho Final de Graduação
-              deve articular conhecimentos teóricos e práticos desenvolvidos ao
-              longo do curso.
-            </p>
-            <p>
-              A indicação de preferência de orientadores e as bancas
-              intermediárias e finais ocorrem em datas específicas do semestre.
-              Confira a programação de bancas, atividades e outras datas
-              importantes na página <a href="calendario.html">Calendário</a>.
-            </p>
-            <p>
-              Os trabalhos defendidos podem ser acessados no repositório
-              institucional (ainda não disponível) e na página
-              <a href="repositorio.html">Repositório</a>. Os trabalhos podem ser
-              pesquisados por título, ano, tema, orientador e por aluno.
-            </p>
-            <p>
-              As disciplinas Metodologia de Projeto 1 e 2 (SPOAMP1 e SPOAMP2)
-              são destinadas ao apoio e organização do TFG. As disciplinas são
-              compostas de encontros presenciais pontuais obrigatórios e
-              acompanhamento do andamento dos trabalhos. Todo o material de
-              apoio disponibilizado nas disciplinas estão disponíveis na página
-              <a href="disciplinas.html">Disciplinas</a>.
-            </p>
-            <p>
-              Este site, o repositório, a organização das bancas e a exposição
-              de TFG são frutos do trabalho da equipe dedicada ao componente.
-              Confira os integrantes e os contatos para comunicação na página
-              <a href="equipe.html">Equipe</a>.
-            </p>
-            <br />
-          </div>
-          <div id="advisors-loading" class="repository-message">
-            Carregando lista de orientadores...
-          </div>
-          <div id="advisors-error" class="repository-message" hidden></div>
-          <div id="advisors-empty" class="repository-message" hidden>
-            Ainda não há orientadores cadastrados na planilha.
-          </div>
 
-          <div id="advisors-list"></div>
+          <div id="project-loading" class="repository-message">
+            Carregando dados do trabalho...
+          </div>
+          <div id="project-error" class="repository-message" hidden></div>
+
+          <div id="project-content" class="cta visible project-detail-container" hidden>
+            <div class="project-layout">
+              <div id="project-image-wrapper" class="project-image-wrapper"></div>
+              <div class="project-text">
+                <p id="project-author" class="project-meta-line"></p>
+                <p id="project-advisors" class="project-meta-line"></p>
+                <p id="project-banca" class="project-meta-line"></p>
+                <p id="project-extra-meta" class="project-meta-line"></p>
+                <p id="project-keywords" class="project-meta-line"></p>
+
+                <h2>Resumo</h2>
+                <p id="project-abstract"></p>
+
+                <div id="project-links"></div>
+
+                <p>
+                  <a href="repositorio.html" class="btn-voltar"
+                    >&larr; Voltar para o repositório</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -163,3 +148,4 @@
     <script src="javascript/repositorio.js"></script>
   </body>
 </html>
+
