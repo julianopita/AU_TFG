@@ -45,7 +45,8 @@ async function fetchSheetRows(sheetName) {
     "https://docs.google.com/spreadsheets/d/" +
     SPREADSHEET_ID +
     "/gviz/tq?sheet=" +
-    encodeURIComponent(sheetName);
+    encodeURIComponent(sheetName)  +
+    "&headers=1";
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -449,12 +450,24 @@ function fillProjectDetail(project) {
     "Resumo não informado. Entre em contato com a coordenação para mais informações.";
 
   // Imagem do projeto (opcional)
-  if (project.imagem) {
-    const img = document.createElement("img");
-    img.src = project.imagem;
-    img.alt = `Imagem ilustrativa do trabalho: ${project.titulo || ""}`;
-    imageWrapper.appendChild(img);
+if (project.imagem) {
+  let imageUrl = project.imagem;
+  
+  // Convert Google Drive link to direct image URL
+  if (imageUrl.includes("drive.google.com")) {
+    const fileIdMatch = imageUrl.match(/\/d\/(.*?)(\/|$)/);
+    if (fileIdMatch) {
+      const fileId = fileIdMatch[1];
+      // Use Google's embedding service instead
+      imageUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+    }
   }
+  
+  const img = document.createElement("img");
+  img.src = imageUrl;
+  img.alt = `Imagem ilustrativa do trabalho: ${project.titulo || ""}`;
+  imageWrapper.appendChild(img);
+}
 
   // Links
   linksEl.innerHTML = "";
@@ -607,28 +620,70 @@ function normalizeAdvisor(raw) {
   };
 
   return {
-    id: get("ID", "Id", "id"),
-    nome: get("Nome", "Docente", "nome"),
-    lattes: get("Lattes", "Currículo Lattes", "Curriculo Lattes"),
-    email: get("E-mail", "Email", "e-mail"),
-    areas: get("Áreas de atuação", "Areas de atuação", "Áreas", "Areas"),
-    palavrasChave: get("Palavras-chave", "Palavras chave", "palavrasChave"),
-    disponibilidade: get("Disponibilidade", "Vagas", "disponibilidade"),
-    observacoes: get("Observações", "Observacoes", "obs"),
+    id: Math.random(), // Generate a simple ID since there's no ID column
+    nome: get("Nome"),
+    lattes: get("Lattes"),
+    email: get("Email"),
+    areas: get("Áreas de atuação"),
+    palavrasChave: get("Palavras-chave"),
+    disponibilidade: get("Disponibilidade"),
+    observacoes: get("Observações"),
   };
 }
 
 async function fetchAdvisors() {
+  console.log("fetchAdvisors called, allAdvisors.length:", allAdvisors.length);
+  
   if (allAdvisors.length) {
+    console.log("Returning cached advisors");
     return allAdvisors;
   }
 
+  console.log("Fetching from sheet:", SHEETS.orientadores);
   const rawRows = await fetchSheetRows(SHEETS.orientadores);
+  console.log("Raw rows:", rawRows);
+  
   const advisors = rawRows.map((row) => normalizeAdvisor(row));
+  console.log("Normalized advisors:", advisors);
 
-  // Mantém apenas linhas que têm nome
   allAdvisors = advisors.filter((a) => a.nome);
+  console.log("Filtered advisors (with nome):", allAdvisors);
+  
   return allAdvisors;
+}
+
+// Add this right after the fetchAdvisors function
+
+async function initAdvisorsPage() {
+  const loadingEl = document.getElementById("advisors-loading");
+  const errorEl = document.getElementById("advisors-error");
+  const emptyEl = document.getElementById("advisors-empty");
+
+  try {
+    console.log("Starting to fetch advisors...");
+    const rawRows = await fetchSheetRows(SHEETS.orientadores);
+    console.log("Raw rows from sheet:", rawRows);
+    
+    const advisors = await fetchAdvisors();
+    console.log("Processed advisors:", advisors);
+    
+    loadingEl.hidden = true;
+
+    if (!advisors.length) {
+      console.warn("No advisors found after filtering");
+      emptyEl.hidden = false;
+      return;
+    }
+
+    console.log("Rendering", advisors.length, "advisors");
+    renderAdvisorsList(advisors);
+  } catch (error) {
+    console.error("Error loading advisors:", error);
+    loadingEl.hidden = true;
+    errorEl.hidden = false;
+    errorEl.textContent =
+      "Ocorreu um erro ao carregar a lista de orientadores. Verifique a configuração da planilha e tente novamente.";
+  }
 }
 
 async function initAdvisorsPage() {
