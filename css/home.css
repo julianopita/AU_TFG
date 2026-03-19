@@ -266,6 +266,7 @@ h2 {
 
 .project-card-button-secondary {
   background-color: var(--cor-neutra-cinza-escuro);
+  color: white !important;
 }
 
 .project-card-button-secondary:hover {
@@ -348,7 +349,8 @@ h2 {
 
 .advisor-areas,
 .advisor-keywords,
-.advisor-meta {
+.advisor-meta,
+.advisor-orientandos {
   font-size: 0.9rem;
   color: var(--cor-neutra-cinza-escuro);
 }
@@ -412,4 +414,3 @@ h2 {
 .project-meta-line strong {
   font-weight: 600;
 }
-

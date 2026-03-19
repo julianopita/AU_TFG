@@ -7,13 +7,13 @@
 :root {
   --cor-footer-fundo: #ffe8b4;
   --cor-principal-fundo: #fff9ea;
-  --cor-botao-fundo: #00e498;
+  --cor-botao-fundo: rgb(185, 4, 4);
   --cor-titulo: #ffffff;
   --cor-titulo-destaque: rgb(185, 4, 4);
   --cor-quadrado-onda-fundo: #00e498;
-  --cor-palavra-destaque: #00e498;
+  --cor-palavra-destaque: rgb(185, 4, 4);
   --cor-hover-botao: #ffd988;
-  --cor-estrelas: #00e498;
+  --cor-estrelas: rgb(185, 4, 4);
   --cor-itens-header: #ffffff;
 
   --cor-neutra-preta: #000000;
@@ -36,7 +36,8 @@
   font-family: "SF Compact Display Thin";
   font-style: normal;
   font-weight: light;
-  src: local("SF Compact Display Thin"),
+  src:
+    local("SF Compact Display Thin"),
     url("../fonts/sf-compact-display-thin-58646eb43a785.woff") format("woff");
 }
 
@@ -44,7 +45,8 @@
   font-family: "SF Compact Display Medium";
   font-style: normal;
   font-weight: normal;
-  src: local("SF Compact Display Medium"),
+  src:
+    local("SF Compact Display Medium"),
     url("../fonts/sf-compact-display-medium-5864711817c30.woff") format("woff");
 }
 

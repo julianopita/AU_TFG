@@ -6,7 +6,7 @@
 //    https://docs.google.com/spreadsheets/d/SEU_ID_AQUI/edit
 // 3. Atualize as constantes abaixo com o ID e o nome da aba.
 
-const SPREADSHEET_ID = "1WREleFc-FAj-4w1RiWwNEsgB_ZNbmjShe4377HoXx5g";
+const SPREADSHEET_ID = "1w27m5WS208-qdb1EVyCl8O1cWLgNZsWUzAoTAdAuMWc";
 const SHEET_NAME = "Projetos"; // nome da aba onde estão os dados
 
 // Nome das abas dentro da planilha principal
@@ -471,16 +471,19 @@ if (project.imagem) {
 
   // Links
   linksEl.innerHTML = "";
+  const actionsEl = document.createElement("div");
+    actionsEl.className = "project-card-actions";
 
   if (project.linkPdf) {
     const pdfLink = document.createElement("a");
     pdfLink.href = project.linkPdf;
     pdfLink.target = "_blank";
     pdfLink.rel = "noopener noreferrer";
-    pdfLink.className = "project-card-button";
+    pdfLink.className = "project-card-button project-card-button-secondary";
     pdfLink.textContent = "Baixar PDF do trabalho";
     linksEl.appendChild(pdfLink);
-  }
+  } 
+    
 
   if (project.linkOutros) {
     const outrosLink = document.createElement("a");
@@ -628,6 +631,9 @@ function normalizeAdvisor(raw) {
     palavrasChave: get("Palavras-chave"),
     disponibilidade: get("Disponibilidade"),
     observacoes: get("Observações"),
+    orientandos1: get("Orientandos TFG1"),
+    orientandos2: get("Orientandos TFG2"),
+    orientandos3: get("Coorientandos"),
   };
 }
 
@@ -755,6 +761,27 @@ function renderAdvisorsList(advisors) {
     metaP.textContent = metaParts.join(" | ");
     if (metaP.textContent) {
       card.appendChild(metaP);
+    }
+
+    if(adv.orientandos1) {
+      const orientandosP = document.createElement("p");
+      orientandosP.className = "advisor-orientandos";
+      orientandosP.textContent = `Orientandos TFG1: ${adv.orientandos1}`;
+      card.appendChild(orientandosP);
+    }
+
+     if(adv.orientandos2) {
+      const orientandosP = document.createElement("p");
+      orientandosP.className = "advisor-orientandos";
+      orientandosP.textContent = `Orientandos TFG2: ${adv.orientandos2}`;
+      card.appendChild(orientandosP);
+    }
+
+     if(adv.orientandos3) {
+      const orientandosP = document.createElement("p");
+      orientandosP.className = "advisor-orientandos";
+      orientandosP.textContent = `Coorientandos: ${adv.orientandos3}`;
+      card.appendChild(orientandosP);
     }
 
     const linksDiv = document.createElement("div");
