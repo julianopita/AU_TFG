@@ -465,7 +465,9 @@ function fillProjectDetail(project) {
   const extraParts = [];
   if (project.curso) extraParts.push(`Curso: ${project.curso}`);
   if (project.ano || project.semestre) {
-    const periodo = [project.ano, project.semestre].filter((v) => v).join(" - ");
+    const periodo = [project.ano, project.semestre]
+      .filter((v) => v)
+      .join(" - ");
     extraParts.push(`Período: ${periodo}`);
   }
   if (project.dataDefesa) extraParts.push(`Data da defesa: ${project.dataDefesa}`);
@@ -630,6 +632,7 @@ function normalizeBanca(raw) {
 
   return {
     data: get("Data", "data"),
+    horario: get("Horário", "Horario", "Hora", "hora"),
     aluno: get("Aluno", "Autor", "Autor(a)"),
     titulo: get("Título", "Titulo", "Título do Trabalho", "Título do projeto"),
     orientador: get("Orientador", "Orientador(a)"),
@@ -660,40 +663,83 @@ function renderBancas(bancas) {
     return;
   }
 
-  // Ordena por data (string compare; ajuste para formato ISO se necessário)
-  const sorted = [...bancas].sort((a, b) => String(a.data).localeCompare(String(b.data)));
+  const weekDays = [
+    "domingo",
+    "segunda-feira",
+    "terça-feira",
+    "quarta-feira",
+    "quinta-feira",
+    "sexta-feira",
+    "sábado",
+  ];
+
+  const parseDate = (value) => {
+    const raw = String(value || "").trim();
+    const dmY = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (dmY) {
+      return new Date(Number(dmY[3]), Number(dmY[2]) - 1, Number(dmY[1]));
+    }
+    const dateFunc = raw.match(/^Date\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (dateFunc) {
+      return new Date(Number(dateFunc[1]), Number(dateFunc[2]), Number(dateFunc[3]));
+    }
+    return new Date(raw);
+  };
+
+  const sorted = [...bancas].sort((a, b) => {
+    const dateA = parseDate(a.data || "");
+    const dateB = parseDate(b.data || "");
+    return dateA - dateB;
+  });
+
+  let currentGroup = "";
 
   for (const b of sorted) {
+    const dateLabel = b.data || "Data não informada";
+    const date = parseDate(b.data);
+    const groupLabel =
+      !isNaN(date.getTime()) && dateLabel !== "Data não informada"
+        ? `${dateLabel} - ${weekDays[date.getDay()]} `
+        : dateLabel;
+
+    if (groupLabel !== currentGroup) {
+      currentGroup = groupLabel;
+      const groupRow = document.createElement("tr");
+      groupRow.className = "bancas-group-row";
+      const groupCell = document.createElement("td");
+      groupCell.colSpan = 9;
+      groupCell.textContent = groupLabel;
+      groupRow.appendChild(groupCell);
+      container.appendChild(groupRow);
+    }
+
     const row = document.createElement("tr");
 
     const dataTd = document.createElement("td");
+    dataTd.className = "bancas-data-cell";
     dataTd.textContent = b.data || "";
     row.appendChild(dataTd);
-
+    const horarioTd = document.createElement("td");
+    horarioTd.textContent = b.horario || "";
+    row.appendChild(horarioTd);
     const alunoTd = document.createElement("td");
     alunoTd.textContent = b.aluno || "";
     row.appendChild(alunoTd);
-
     const tituloTd = document.createElement("td");
     tituloTd.textContent = b.titulo || "";
     row.appendChild(tituloTd);
-
     const orientadorTd = document.createElement("td");
     orientadorTd.textContent = b.orientador || "";
     row.appendChild(orientadorTd);
-
     const coorientadorTd = document.createElement("td");
     coorientadorTd.textContent = b.coorientador || "";
     row.appendChild(coorientadorTd);
-
     const convidado1Td = document.createElement("td");
     convidado1Td.textContent = b.convidado1 || "";
     row.appendChild(convidado1Td);
-
     const convidado2Td = document.createElement("td");
     convidado2Td.textContent = b.convidado2 || "";
     row.appendChild(convidado2Td);
-
     const convidado3Td = document.createElement("td");
     convidado3Td.textContent = b.convidado3 || "";
     row.appendChild(convidado3Td);
@@ -740,15 +786,12 @@ function renderCalendar(events) {
     const dataTd = document.createElement("td");
     dataTd.textContent = ev.data;
     row.appendChild(dataTd);
-
     const tipoTd = document.createElement("td");
     tipoTd.textContent = ev.tipo;
     row.appendChild(tipoTd);
-
     const atvTd = document.createElement("td");
     atvTd.textContent = ev.atividade;
     row.appendChild(atvTd);
-
     const descTd = document.createElement("td");
     descTd.textContent = ev.descricao;
     row.appendChild(descTd);
@@ -813,22 +856,14 @@ async function initAdvisorsPage() {
   const emptyEl = document.getElementById("advisors-empty");
 
   try {
-    console.log("Starting to fetch advisors...");
-    const rawRows = await fetchSheetRows(SHEETS.orientadores);
-    console.log("Raw rows from sheet:", rawRows);
-    
     const advisors = await fetchAdvisors();
-    console.log("Processed advisors:", advisors);
-    
     loadingEl.hidden = true;
 
     if (!advisors.length) {
-      console.warn("No advisors found after filtering");
       emptyEl.hidden = false;
       return;
     }
 
-    console.log("Rendering", advisors.length, "advisors");
     renderAdvisorsList(advisors);
   } catch (error) {
     console.error("Error loading advisors:", error);
