@@ -1,9 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
     <title>TFG IFSP | Calendário</title>
-    <meta name="description" content="Calendário de bancas, entregas e atividades do Trabalho Final de Graduação em Arquitetura e Urbanismo do IFSP." />
+    <meta
+      name="description"
+      content="Calendário de bancas, entregas e atividades do Trabalho Final de Graduação em Arquitetura e Urbanismo do IFSP."
+    />
     <meta
       name="keywords"
       content="Trabalho Final de Graduação, calendário, bancas, prazos, Arquitetura e Urbanismo, IFSP"
@@ -122,6 +125,35 @@
             Ainda não há eventos cadastrados no calendário.
           </div>
 
+          <!-- Bancas section (populated from the same Google Spreadsheet, new worksheet) -->
+          <section id="bancas-section">
+            <h2 class="sectionTitle">BANCAS</h2>
+
+            <div id="bancas-loading" class="repository-message">
+              Carregando bancas...
+            </div>
+            <div id="bancas-error" class="repository-message" hidden></div>
+            <div id="bancas-empty" class="repository-message" hidden>
+              Ainda não há bancas cadastradas.
+            </div>
+
+            <table class="bancas-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Aluno</th>
+                  <th>Título</th>
+                  <th>Orientador(a)</th>
+                  <th>Co orientador(a)</th>
+                  <th>Convidado(a)</th>
+                  <th>Convidado(a)</th>
+                  <th>Convidado(a)</th>
+                </tr>
+              </thead>
+              <tbody id="bancas-table-body"></tbody>
+            </table>
+          </section>
+          <h2 class="sectionTitle">CALENDÁRIO</h2>
           <table class="calendar-table">
             <thead>
               <tr>

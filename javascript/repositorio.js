@@ -14,6 +14,7 @@ const SHEETS = {
   projetos: "Projetos",
   calendario: "Calendario",
   orientadores: "Orientadores",
+  bancas: "Bancas",
 };
 
 // Endpoint no formato JSON (Google Visualization API)
@@ -26,7 +27,7 @@ const SHEET_GVIZ_URL =
 let allProjects = [];
 let allCalendarEvents = [];
 let allAdvisors = [];
-
+let allBancas = [];
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("repository-page")) {
     initRepositoryPage();
@@ -536,22 +537,132 @@ async function initCalendarPage() {
   const errorEl = document.getElementById("calendar-error");
   const emptyEl = document.getElementById("calendar-empty");
 
+  const bancasLoadingEl = document.getElementById("bancas-loading");
+  const bancasErrorEl = document.getElementById("bancas-error");
+  const bancasEmptyEl = document.getElementById("bancas-empty");
+
   try {
     const events = await fetchCalendarEvents();
     loadingEl.hidden = true;
 
     if (!events.length) {
       emptyEl.hidden = false;
-      return;
+    } else {
+      renderCalendar(events);
     }
-
-    renderCalendar(events);
   } catch (error) {
     console.error(error);
     loadingEl.hidden = true;
     errorEl.hidden = false;
     errorEl.textContent =
       "Ocorreu um erro ao carregar o calendário. Verifique a configuração da planilha e tente novamente.";
+  }
+
+  // Carrega e renderiza as bancas (se houver)
+  try {
+    if (bancasLoadingEl) bancasLoadingEl.hidden = false;
+    const bancas = await fetchBancas();
+    if (bancasLoadingEl) bancasLoadingEl.hidden = true;
+
+    if (!bancas.length) {
+      if (bancasEmptyEl) bancasEmptyEl.hidden = false;
+      return;
+    }
+
+    renderBancas(bancas);
+  } catch (error) {
+    console.error("Erro ao carregar bancas:", error);
+    if (bancasLoadingEl) bancasLoadingEl.hidden = true;
+    if (bancasErrorEl) {
+      bancasErrorEl.hidden = false;
+      bancasErrorEl.textContent =
+        "Ocorreu um erro ao carregar a lista de bancas. Verifique a configuração da planilha e tente novamente.";
+    }
+  }
+}
+
+// New: normaliza linhas da aba "Bancas"
+function normalizeBanca(raw) {
+  const get = (...keys) => {
+    for (const key of keys) {
+      if (raw[key] !== undefined && raw[key] !== null && String(raw[key]).trim() !== "") {
+        return String(raw[key]).trim();
+      }
+    }
+    return "";
+  };
+
+  return {
+    data: get("Data", "data"),
+    aluno: get("Aluno", "Autor", "Autor(a)"),
+    titulo: get("Título", "Titulo", "Título do Trabalho", "Título do projeto"),
+    orientador: get("Orientador", "Orientador(a)"),
+    coorientador: get("Co orientador", "Coorientador", "Co orientador(a)"),
+    convidado1: get("Convidado(a) 1", "Convidado 1", "Convidado(a)", "Convidado"),
+    convidado2: get("Convidado(a) 2", "Convidado 2"),
+    convidado3: get("Convidado(a) 3", "Convidado 3"),
+  };
+}
+
+async function fetchBancas() {
+  if (allBancas.length) return allBancas;
+
+  const rawRows = await fetchSheetRows(SHEETS.bancas);
+  const bancas = rawRows.map((row) => normalizeBanca(row));
+
+  // Mantém apenas linhas que têm data e aluno/título (ajustável)
+  allBancas = bancas.filter((b) => b.data && (b.aluno || b.titulo));
+  return allBancas;
+}
+
+function renderBancas(bancas) {
+  const container = document.getElementById("bancas-table-body");
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (!bancas || !bancas.length) {
+    return;
+  }
+
+  // Ordena por data (string compare; ajuste para formato ISO se necessário)
+  const sorted = [...bancas].sort((a, b) => String(a.data).localeCompare(String(b.data)));
+
+  for (const b of sorted) {
+    const row = document.createElement("tr");
+
+    const dataTd = document.createElement("td");
+    dataTd.textContent = b.data || "";
+    row.appendChild(dataTd);
+
+    const alunoTd = document.createElement("td");
+    alunoTd.textContent = b.aluno || "";
+    row.appendChild(alunoTd);
+
+    const tituloTd = document.createElement("td");
+    tituloTd.textContent = b.titulo || "";
+    row.appendChild(tituloTd);
+
+    const orientadorTd = document.createElement("td");
+    orientadorTd.textContent = b.orientador || "";
+    row.appendChild(orientadorTd);
+
+    const coorientadorTd = document.createElement("td");
+    coorientadorTd.textContent = b.coorientador || "";
+    row.appendChild(coorientadorTd);
+
+    const convidado1Td = document.createElement("td");
+    convidado1Td.textContent = b.convidado1 || "";
+    row.appendChild(convidado1Td);
+
+    const convidado2Td = document.createElement("td");
+    convidado2Td.textContent = b.convidado2 || "";
+    row.appendChild(convidado2Td);
+
+    const convidado3Td = document.createElement("td");
+    convidado3Td.textContent = b.convidado3 || "";
+    row.appendChild(convidado3Td);
+
+    container.appendChild(row);
   }
 }
 

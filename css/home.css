@@ -321,6 +321,40 @@ h2 {
   background-color: #ececec;
 }
 
+/* -------- Bancas Table -------- */
+
+.bancas-table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.bancas-table th,
+.bancas-table td {
+  border: 1px solid var(--cor-neutra-cinza-claro);
+  padding: 8px 10px;
+}
+
+.bancas-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+#bancas-section {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 30px;
+}
+
+.sectionTitle {
+  font-size: 1.3rem;
+  color: var(--cor-neutra-preta);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
 /* -------- Orientadores -------- */
 
 #advisors-list {
