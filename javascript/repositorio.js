@@ -40,51 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Busca genérica de linhas em uma aba da planilha
-async function fetchSheetRows(sheetName) {
-  const url =
-    "https://docs.google.com/spreadsheets/d/" +
-    SPREADSHEET_ID +
-    "/gviz/tq?sheet=" +
-    encodeURIComponent(sheetName)  +
-    "&headers=1";
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Não foi possível carregar os dados da planilha.");
-  }
-
-  const text = await response.text();
-
-  // A resposta vem como: google.visualization.Query.setResponse(...)
-  const jsonText = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
-  const json = JSON.parse(jsonText);
-
-  const cols = json.table.cols.map((c) => c.label || c.id);
-
-  return json.table.rows.map((row) => {
-    const obj = {};
-    row.c.forEach((cell, idx) => {
-      const key = cols[idx] || `col_${idx}`;
-      obj[key] = cell && typeof cell.v !== "undefined" ? cell.v : "";
-    });
-    return obj;
-  });
-}
-
-async function fetchProjects() {
-  if (allProjects.length) {
-    return allProjects;
-  }
-
-  const rawRows = await fetchSheetRows(SHEETS.projetos);
-  const projects = rawRows.map((row) => normalizeProject(row));
-
-  // Mantém apenas linhas que têm um ID definido
-  allProjects = projects.filter((p) => p.id);
-  return allProjects;
-}
-
 // Normaliza os nomes das colunas da planilha em um objeto consistente
 // Nomes esperados (cabeçalhos da planilha, podem ser ajustados conforme necessidade):
 // ID, Ano, Semestre, Autor, Título, Orientador, Coorientador,
@@ -118,6 +73,87 @@ function normalizeProject(raw) {
     licenca: get("Licença", "Licenca", "licenca"),
     imagem: get("Link Imagem", "Imagem", "Image"),
   };
+}
+
+function normalizeSheetCell(cell) {
+  if (!cell || typeof cell.v === "undefined") {
+    return "";
+  }
+
+  if (cell.f) {
+    return String(cell.f).trim();
+  }
+
+  const raw = cell.v;
+
+  if (typeof raw === "object" && raw !== null) {
+    if (
+      raw.year !== undefined &&
+      raw.month !== undefined &&
+      raw.day !== undefined
+    ) {
+      const date = new Date(raw.year, raw.month, raw.day);
+      return date.toLocaleDateString("pt-BR");
+    }
+    return String(raw).trim();
+  }
+
+  if (typeof raw === "string") {
+    const dateMatch = raw.match(
+      /^Date\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+))?\s*\)$/
+    );
+    if (dateMatch) {
+      const year = Number(dateMatch[1]);
+      const month = Number(dateMatch[2]);
+      const day = Number(dateMatch[3]);
+      const date = new Date(year, month, day);
+      return date.toLocaleDateString("pt-BR");
+    }
+  }
+
+  return String(raw).trim();
+}
+
+async function fetchSheetRows(sheetName) {
+  const url =
+    "https://docs.google.com/spreadsheets/d/" +
+    SPREADSHEET_ID +
+    "/gviz/tq?sheet=" +
+    encodeURIComponent(sheetName) +
+    "&headers=1";
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Não foi possível carregar os dados da planilha.");
+  }
+
+  const text = await response.text();
+  const jsonText = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+  const json = JSON.parse(jsonText);
+
+  const cols = json.table.cols.map((c) => c.label || c.id);
+
+  return json.table.rows.map((row) => {
+    const obj = {};
+    row.c.forEach((cell, idx) => {
+      const key = cols[idx] || `col_${idx}`;
+      obj[key] = normalizeSheetCell(cell);
+    });
+    return obj;
+  });
+}
+
+async function fetchProjects() {
+  if (allProjects.length) {
+    return allProjects;
+  }
+
+  const rawRows = await fetchSheetRows(SHEETS.projetos);
+  const projects = rawRows.map((row) => normalizeProject(row));
+
+  // Mantém apenas linhas que têm um ID definido
+  allProjects = projects.filter((p) => p.id);
+  return allProjects;
 }
 
 // ---------------------- PÁGINA DO REPOSITÓRIO ----------------------
